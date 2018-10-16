@@ -1,5 +1,5 @@
 from os import environ
-from SOSial import app
+from SOSial import app, db
 
 
 if __name__ == '__main__':
@@ -8,4 +8,7 @@ if __name__ == '__main__':
         PORT = int(environ.get('SERVER_PORT', '5555'))
     except ValueError:
         PORT = 5555
+
+    db.create_all()
     app.run(HOST, PORT)
+
