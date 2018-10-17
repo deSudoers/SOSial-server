@@ -18,6 +18,10 @@ class UserFamily(Resource):
             if family_member is None:
                 return {"message": "Family member has not registered."}, 404
 
+            if family_member.user_id == user_id:
+                return {"message": "You cannot add yourself as a family member."}, 400
+
+
             user_details = UserDetailModel.fetch_using_id(user_id=user_id)
 
             if user_details is None:
