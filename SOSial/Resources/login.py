@@ -1,6 +1,6 @@
 from flask import session, redirect, request, jsonify
 from flask_restful import Resource
-from bcrypt import checkpw
+from werkzeug.security import generate_password_hash, check_password_hash
 from marshmallow import ValidationError
 
 from SOSial.Models.user import UserModel
@@ -23,7 +23,7 @@ class UserLogin(Resource):
 
             user = UserModel.fetch_using_username(data.username)
             if user:
-                if checkpw(data.password.encode("utf-8"), user.password):
+                if check_password_hash(user.password, data.password.encode("utf-8")):
                     session["username"] = user.username
                     session["user_id"] = user.user_id
                     return jsonify({"message": "User successfully logged in."})

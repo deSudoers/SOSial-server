@@ -1,6 +1,9 @@
 from flask import session, request, jsonify
 from flask_restful import Resource
 from bcrypt import hashpw, gensalt
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
 from marshmallow import ValidationError
 
 from SOSial.Models.user import UserModel
@@ -19,7 +22,7 @@ class UserRegister(Resource):
         except ValidationError as err:
             return jsonify({"message": err.messages})
 
-        hashed = hashpw(data.password.encode("utf-8"), gensalt())
+        hashed = generate_password_hash(data.password.encode("utf-8"))
         user = UserModel.fetch_using_username(data.username)
 
         if user is None:
