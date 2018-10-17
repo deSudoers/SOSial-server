@@ -33,14 +33,6 @@ class UserDetailModel(db.Model):
         pass
 
     @classmethod
-    def fetch_using_username(cls, username):
-        return cls.query.filter_by(username=username).first()
-
-    @classmethod
-    def fetch_using_email(cls, email):
-        return cls.query.filter_by(email=email).first()
-
-    @classmethod
     def fetch_using_id(cls, user_id):
         return cls.query.filter_by(user_id=user_id).first()
 

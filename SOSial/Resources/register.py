@@ -30,11 +30,11 @@ class UserRegister(Resource):
                 try:
                     data.password = hashed
                     data.save_to_db()
-                    session["username"] = user.username
-                    session["user_id"] = user.user_id
                 except:
                     return {"message": "An error occurred while registering."}, 500
 
+                session["username"] = user.username
+                session["user_id"] = user.user_id
                 return {"message": "User successfully registered."}, 200
             else:
                 return {"message": "A user with the same email already exists."}, 400

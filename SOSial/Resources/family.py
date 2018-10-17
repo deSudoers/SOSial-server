@@ -41,7 +41,21 @@ class UserFamily(Resource):
 
     def delete(self):
         username = session.get("username", None)
+        user_id = session.get("user_id", None)
         if username:
-            pass
+            user_details = UserDetailModel.fetch_using_id(user_id)
+            json_data = request.get_json()
+            family = pickle.loads(user_details.family)
+
+            if json_data["user_id"] in family:
+                family.remove(json_data["user_id"])
+
+            try:
+                user_details.save_to_db()
+            except:
+                return {"message": "An error occured while adding family member."}, 500
+
+            return {"message": "Family member successfully deleted."}
+
         else:
             return {"message": "User not logged in."}, 401
