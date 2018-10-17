@@ -18,7 +18,7 @@ class UserRegister(Resource):
         try:
             data = user_schema.load(json_data).data
         except ValidationError as err:
-            return jsonify({"message": err.messages}), 400
+            return {"message": err.messages}, 400
 
         hashed = generate_password_hash(data.password.encode("utf-8"))
         user = UserModel.fetch_using_username(data.username)
@@ -33,7 +33,7 @@ class UserRegister(Resource):
                 except:
                     return {"message": "An error occurred while registering."}, 500
 
-                return jsonify({"message": "User successfully registered."}), 200
+                return {"message": "User successfully registered."}, 200
             else:
                 return {"message": "A user with the same email already exists."}, 400
         else:

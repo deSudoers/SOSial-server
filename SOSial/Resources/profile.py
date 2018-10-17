@@ -11,9 +11,10 @@ class UserProfile(Resource):
         if username:
             user = UserModel.fetch_using_username(username)
             user_schema = UserSchema()
-            return jsonify(user_schema.dump(user).data), 200
+            print(user_schema.dump(user).data)
+            return user_schema.dump(user).data, 200
         else:
-            return jsonify({"message": "User not logged in."}), 401
+            return {"message": "User not logged in."}, 401
 
     def put(self):
         username = session.get("username", None)
@@ -25,7 +26,7 @@ class UserProfile(Resource):
             try:
                 data = user_schema.load(json_data, partial=True).data
             except ValidationError as err:
-                return jsonify("message", err.messages)
+                return {"message", err.messages}, 400
 
             user.email = data.email
             user.password = data.password
@@ -37,9 +38,9 @@ class UserProfile(Resource):
             except:
                 return {"message": "An error occurred while updating details.."}, 500
 
-            return jsonify({"message": "User details updated."})
+            return {"message": "User details updated."}, 200
         else:
-            return jsonify({"message": "User not logged in."})
+            return {"message": "User not logged in."}, 401
 
     def delete(self):
         username = session.get("username", None)

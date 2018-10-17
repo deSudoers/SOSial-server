@@ -17,8 +17,8 @@ class UserLocation(Resource):
             user_details.location = json_data["location"]
             user_details.save_to_db()
 
-            return jsonify({"message": "Location updated."}), 200
+            return {"message": "Location updated."}, 200
 
         else:
-            return jsonify({"message": "User not logged in."}), 401
+            return {"message": "User not logged in."}, 401
 

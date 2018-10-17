@@ -16,8 +16,8 @@ class UserFamily(Resource):
 
             user_details.location = pickle.dumps(json_data["family"])
             user_details.save_to_db()
-            return jsonify({"message": "Family updated."}), 200
+            return {"message": "Family updated."}, 200
 
         else:
-            return jsonify({"message": "User not logged in."}), 401
+            return {"message": "User not logged in."}, 401
 
