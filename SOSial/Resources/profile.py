@@ -1,18 +1,37 @@
 from flask import session, jsonify, request
 from flask_restful import Resource
-from SOSial.Models.user import UserModel
+from SOSial.Models.user import UserModel, UserDetailModel
 from SOSial.Schemas.user import UserSchema
 from marshmallow import ValidationError
-
+import pickle
 
 class UserProfile(Resource):
     def get(self):
         username = session.get("username", None)
+        user_id = session.get("user_id", None)
         if username:
             user = UserModel.fetch_using_username(username)
+            user_detail = UserDetailModel.fetch_using_id(user_id)
             user_schema = UserSchema()
-            print(user_schema.dump(user).data)
-            return user_schema.dump(user).data, 200
+            user_data = user_schema.dump(user).data
+            family = pickle.loads(user_detail.family)
+            family_id = []
+            family_name = []
+            family_email = []
+            for member_id in family:
+                member = UserModel.fetch_using_id(member_id)
+                family_id.append(str(member.user_id))
+                family_email.append(member.email)
+                family_name.append(member.first_name + member.last_name)
+
+            return {"user_id": user_data["user_id"],
+                    "email": user_data["email"],
+                    "mobile": user_data["email"],
+                    "name": user_data["first_name"] + user_data["last_name"],
+                    "family_id": ",".join(family_id),
+                    "family_email": ",".join(family_email),
+                    "family_name": ",".join(family_name)
+                    }, 200
         else:
             return {"message": "User not logged in."}, 401
 
@@ -50,10 +69,10 @@ class UserProfile(Resource):
                 try:
                     user.delete_from_db()
                 except:
-                    return jsonify({"message": "An error occurred while deleting."}), 500
+                    return {"message": "An error occurred while deleting."}, 500
                 session.clear()
-                return jsonify({"message": "User successfully deleted."})
+                return {"message": "User successfully deleted."}
             else:
-                return jsonify({"message": "User doesn't exist."})
+                return {"message": "User doesn't exist."}
         else:
-            return jsonify({"message": "User not logged in."})
+            return {"message": "User not logged in."}

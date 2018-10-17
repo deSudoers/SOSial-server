@@ -15,7 +15,11 @@ class UserLocation(Resource):
                 user_details = UserDetailModel(user_id=user_id, location=json_data["location"])
 
             user_details.location = json_data["location"]
-            user_details.save_to_db()
+
+            try:
+                user_details.save_to_db()
+            except:
+                return {"message": "An error occurred while saving location."}, 500
 
             return {"message": "Location updated."}, 200
 
