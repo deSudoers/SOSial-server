@@ -9,9 +9,10 @@ from SOSial.Models.details import UserDetailModel
 class UserFamily(Resource):
     def post(self):
         username = session.get("username", None)
+        user_id = session["user_id"]
+
         if username:
             json_data = request.get_json()
-            user_id = session["user_id"]
             family_member = UserModel.fetch_using_email(json_data["email"])
 
             if family_member is None:

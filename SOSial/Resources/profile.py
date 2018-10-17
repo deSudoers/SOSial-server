@@ -11,18 +11,23 @@ class UserProfile(Resource):
         user_id = session.get("user_id", None)
         if username:
             user = UserModel.fetch_using_username(username)
-            user_detail = UserDetailModel.fetch_using_id(user_id)
+
             user_schema = UserSchema()
             user_data = user_schema.dump(user).data
-            family = pickle.loads(user_detail.family)
+            user_detail = UserDetailModel.fetch_using_id(user_id)
+
             family_id = []
             family_name = []
             family_email = []
-            for member_id in family:
-                member = UserModel.fetch_using_id(member_id)
-                family_id.append(str(member.user_id))
-                family_email.append(member.email)
-                family_name.append(member.first_name + member.last_name)
+
+            if user_detail:
+                family = pickle.loads(user_detail.family)
+                if family:
+                    for member_id in family:
+                        member = UserModel.fetch_using_id(member_id)
+                        family_id.append(str(member.user_id))
+                        family_email.append(member.email)
+                        family_name.append(member.first_name + member.last_name)
 
             return {"user_id": user_data["user_id"],
                     "email": user_data["email"],
