@@ -54,12 +54,14 @@ class UserFamily(Resource):
             if json_data["user_id"] in family:
                 family.remove(json_data["user_id"])
 
-            try:
-                user_details.save_to_db()
-            except:
-                return {"message": "An error occurred while adding family member."}, 500
+                try:
+                    user_details.save_to_db()
+                except:
+                    return {"message": "An error occurred while adding family member."}, 500
 
-            return {"message": "Family member successfully deleted."}
+                return {"message": "Family member successfully deleted."}
+            else:
+                return {"message": "Family member is not part of the family."}, 400
 
         else:
             return {"message": "User not logged in."}, 401
