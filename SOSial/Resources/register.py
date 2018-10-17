@@ -33,8 +33,9 @@ class UserRegister(Resource):
                 except:
                     return {"message": "An error occurred while registering."}, 500
 
-                session["username"] = user.username
-                session["user_id"] = user.user_id
+                session["username"] = data.username
+                session["user_id"] = data.user_id
+
                 return {"message": "User successfully registered."}, 200
             else:
                 return {"message": "A user with the same email already exists."}, 400
