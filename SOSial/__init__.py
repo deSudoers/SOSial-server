@@ -59,7 +59,7 @@ api.add_resource(UserRegister, "/register")
 
 from SOSial.Resources.profile import UserProfile
 
-api.add_resource(UserProfile, "/<string:username>")
+api.add_resource(UserProfile, "/profile")
 
 from SOSial.Resources.logout import UserLogout
 

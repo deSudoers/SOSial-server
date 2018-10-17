@@ -1,6 +1,5 @@
 from flask import session, request, jsonify
 from flask_restful import Resource
-from bcrypt import hashpw, gensalt
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -8,7 +7,6 @@ from marshmallow import ValidationError
 
 from SOSial.Models.user import UserModel
 from SOSial.Schemas.user import UserSchema
-from SOSial.Models.details import UserDetailModel
 
 
 class UserRegister(Resource):
@@ -20,7 +18,7 @@ class UserRegister(Resource):
         try:
             data = user_schema.load(json_data).data
         except ValidationError as err:
-            return jsonify({"message": err.messages})
+            return jsonify({"message": err.messages}), 400
 
         hashed = generate_password_hash(data.password.encode("utf-8"))
         user = UserModel.fetch_using_username(data.username)
@@ -35,8 +33,8 @@ class UserRegister(Resource):
                 except:
                     return {"message": "An error occurred while registering."}, 500
 
-                return jsonify({"message": "User successfully registered."})
+                return jsonify({"message": "User successfully registered."}), 200
             else:
-                return {"message": "A user with the same email already exists."}, 500
+                return {"message": "A user with the same email already exists."}, 400
         else:
-            return {"message": "A user with the same username already exists."}, 500
+            return {"message": "A user with the same username already exists."}, 400

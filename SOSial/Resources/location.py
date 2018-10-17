@@ -1,8 +1,8 @@
-from flask import session, redirect, request, jsonify
+from flask import session, request, jsonify
 from flask_restful import Resource
 
-from SOSial.Models.user import UserModel
 from SOSial.Models.details import UserDetailModel
+
 
 class UserLocation(Resource):
     def post(self):
@@ -17,6 +17,8 @@ class UserLocation(Resource):
             user_details.location = json_data["location"]
             user_details.save_to_db()
 
+            return jsonify({"message": "Location updated."}), 200
+
         else:
-            return jsonify({"message": "User not logged in."})
+            return jsonify({"message": "User not logged in."}), 401
 
