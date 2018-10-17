@@ -31,6 +31,10 @@ session = Session(app)
 ma = Marshmallow(app)
 
 
+@app.before_first_request
+def create_databse():
+    db.create_all()
+
 @app.route("/")
 def hello_world():
     return render_template("index.html")

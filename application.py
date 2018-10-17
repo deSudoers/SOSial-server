@@ -9,6 +9,5 @@ if __name__ == '__main__':
     except ValueError:
         PORT = 5555
 
-    db.create_all()
     app.run(HOST, PORT)
 
