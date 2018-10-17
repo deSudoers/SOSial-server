@@ -19,8 +19,7 @@ class UserFamily(Resource):
                 return {"message": "Family member has not registered."}, 404
 
             if family_member.user_id == user_id:
-                return {"message": "You cannot add yourself as a family member."}, 400
-
+                return {"message": "You cannot add yourself as a family member."}, 406
 
             user_details = UserDetailModel.fetch_using_id(user_id=user_id)
 
@@ -35,11 +34,11 @@ class UserFamily(Resource):
             try:
                 user_details.save_to_db()
             except:
-                return {"message": "An error occured while adding family member."}, 500
+                return {"message": "An error occurred while adding family member."}, 500
 
             return {"user_id": family_member.user_id,
                     "email": family_member.email,
-                    "name": family_member.first_name + family_member.last_name}, 200
+                    "name": family_member.first_name + " " + family_member.last_name}, 200
 
         else:
             return {"message": "User not logged in."}, 401
@@ -58,7 +57,7 @@ class UserFamily(Resource):
             try:
                 user_details.save_to_db()
             except:
-                return {"message": "An error occured while adding family member."}, 500
+                return {"message": "An error occurred while adding family member."}, 500
 
             return {"message": "Family member successfully deleted."}
 
