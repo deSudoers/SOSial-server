@@ -19,11 +19,11 @@ db = SQLAlchemy(app)
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SECURE"] = False  # TODO: On production set to True
 # PERMANENT_SESSION_LIFETIME  # TODO: Set value on production
-app.config["SESSION_TYPE"] = "sqlalchemy"
+app.config["SESSION_TYPE"] = "filesystem"
 # SESSION_PERMANENT # TODO: On production set to False
 app.config["SESSION_USE_SIGNER"] = True
-app.config["SESSION_SQLALCHEMY"] = db
-app.config["SESSION_SQLALCHEMY_TABLE"] = "Session"
+# app.config["SESSION_SQLALCHEMY"] = db
+# app.config["SESSION_SQLALCHEMY_TABLE"] = "Session"
 
 
 api = Api(app)
