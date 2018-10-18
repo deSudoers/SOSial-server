@@ -7,3 +7,4 @@ marshmallow==2.16.0
 marshmallow-sqlalchemy==0.14.1
 SQLAlchemy==1.2.12
 pyodbc==4.0.24
+itsdangerous==0.24
