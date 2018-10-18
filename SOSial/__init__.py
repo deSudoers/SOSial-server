@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = "password"
 
 # Configure Database URI:
-params = urllib.parse.quote_plus("DRIVER={ODBC Driver 13 for SQL Server};SERVER=sosial.database.windows.net;DATABASE=data;UID=shrijitsingh99;PWD=Armageddon99")
+params = urllib.parse.quote_plus("DRIVER={ODBC Driver 17 for SQL Server};SERVER=sosial.database.windows.net;DATABASE=data;UID=shrijitsingh99;PWD=Armageddon99")
 
 # params = urllib.parse.quote_plus('DRIVER={SQL Server};SERVER=HARRISONS-THINK;DATABASE=LendApp;Trusted_Connection=yes;')
 
