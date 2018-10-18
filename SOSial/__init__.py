@@ -3,6 +3,7 @@ from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
 from flask_marshmallow import Marshmallow
+import os
 
 app = Flask(__name__)
 
@@ -34,6 +35,10 @@ ma = Marshmallow(app)
 @app.before_first_request
 def create_databse():
     db.create_all()
+    if os.path.isfile("SOSial/data.db"):
+        print("Database Created")
+    else:
+        print("Database not created")
 
 @app.route("/")
 def hello_world():
