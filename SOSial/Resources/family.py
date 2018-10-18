@@ -50,14 +50,14 @@ class UserFamily(Resource):
             user_details = UserDetailModel.fetch_using_id(user_id)
             json_data = request.get_json()
             family = pickle.loads(user_details.family)
-
-            if json_data["user_id"] in family:
-                family.remove(json_data["user_id"])
-
+            family_member = UserModel.fetch_using_email(json_data["email"])
+            if family_member.user_id in family:
+                family.remove(family_member.user_id)
+                user_details.family = pickle.dumps(family)
                 try:
                     user_details.save_to_db()
                 except:
-                    return {"message": "An error occurred while adding family member."}, 500
+                    return {"message": "An error occurred while deleting family member."}, 500
 
                 return {"message": "Family member successfully deleted."}, 200
             else:
