@@ -29,9 +29,6 @@ class UserDetailModel(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    def get_family_info(self):
-        pass
-
     @classmethod
     def fetch_using_id(cls, user_id):
         return cls.query.filter_by(user_id=user_id).first()

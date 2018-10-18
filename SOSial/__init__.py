@@ -72,3 +72,7 @@ api.add_resource(UserLocation, "/location")
 from SOSial.Resources.family import UserFamily
 
 api.add_resource(UserFamily, "/family")
+
+from SOSial.Resources.message import Message
+
+api.add_resource(Message, "/message")

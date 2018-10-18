@@ -59,7 +59,7 @@ class UserFamily(Resource):
                 except:
                     return {"message": "An error occurred while adding family member."}, 500
 
-                return {"message": "Family member successfully deleted."}
+                return {"message": "Family member successfully deleted."}, 200
             else:
                 return {"message": "Family member is not part of the family."}, 400
 
