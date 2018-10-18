@@ -1,6 +1,7 @@
 from flask import session, request, jsonify
 from flask_restful import Resource
 
+from SOSial.Models.user import UserModel
 from SOSial.Models.message import MessageModel
 
 
@@ -10,11 +11,12 @@ class Message(Resource):
         if username:
             json_data = request.get_json()
             for value in json_data.values():
-                message = MessageModel(sender_id=value["sender_id"], receiver_id=value["receiver_id"], message=value["message"])
-                try:
-                    message.save_to_db()
-                except:
-                    return {"message": "An error occurred while saving message."}, 500
+                if MessageModel.fetch_using_unique_key(value["unique_key"]) is None:
+                    message = MessageModel(sender_id=value["sender_id"], receiver_id=value["receiver_id"], message=value["message"], unique_key=value["unique_key"])
+                    try:
+                        message.save_to_db()
+                    except:
+                        return {"message": "An error occurred while saving message."}, 500
             return {"message": "Messages saved."}, 200
 
         else:
@@ -29,8 +31,9 @@ class Message(Resource):
             for value in json_data.values():
                 messages = MessageModel.fetch_using_id(value)
                 for message in messages:
+                    user = UserModel.fetch_using_id(value)
                     response_messages.append({
-                        "sender_id": message.sender_id,
+                        "sender_name": user.first_name + " " + user.last_name,
                         "receiver_id": message.receiver_id,
                         "message": message.message
                                      })
