@@ -3,14 +3,20 @@ from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
 from flask_marshmallow import Marshmallow
-import os
+import os, urllib
 
 app = Flask(__name__)
 
 app.secret_key = "password"
 
+# Configure Database URI:
+params = urllib.parse.quote_plus("DRIVER={ODBC Driver 13 for SQL Server};SERVER=sosial.database.windows.net;DATABASE=data;UID=shrijitsingh99;PWD=Armageddon99")
+
+# params = urllib.parse.quote_plus('DRIVER={SQL Server};SERVER=HARRISONS-THINK;DATABASE=LendApp;Trusted_Connection=yes;')
+
 # SQLAlchemy Configurations
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = "mssql+pyodbc:///?odbc_connect=%s" % params
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 
