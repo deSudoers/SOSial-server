@@ -22,7 +22,6 @@ class UserRegister(Resource):
 
         hashed = generate_password_hash(data.password.encode("utf-8"))
         user = UserModel.fetch_using_username(data.username)
-
         if user is None:
             user = UserModel.fetch_using_email(data.email)
 

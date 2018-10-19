@@ -41,10 +41,6 @@ ma = Marshmallow(app)
 @app.before_first_request
 def create_databse():
     db.create_all()
-    if os.path.isfile("SOSial/data.db"):
-        print("Database Created")
-    else:
-        print("Database not created")
 
 @app.route("/")
 def hello_world():
