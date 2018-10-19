@@ -33,7 +33,8 @@ class UserFamily(Resource):
 
             try:
                 user_details.save_to_db()
-            except:
+            except Exception as e:
+                print(e)
                 return {"message": "An error occurred while adding family member."}, 500
 
             return {"user_id": family_member.user_id,

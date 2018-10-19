@@ -30,7 +30,8 @@ class UserRegister(Resource):
                 try:
                     data.password = hashed
                     data.save_to_db()
-                except:
+                except Exception as e:
+                    print(e)
                     return {"message": "An error occurred while registering."}, 500
 
                 session["username"] = data.username

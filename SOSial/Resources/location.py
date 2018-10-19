@@ -18,7 +18,8 @@ class UserLocation(Resource):
 
             try:
                 user_details.save_to_db()
-            except:
+            except Exception as e:
+                print(e)
                 return {"message": "An error occurred while saving location."}, 500
 
             return {"message": "Location updated."}, 200

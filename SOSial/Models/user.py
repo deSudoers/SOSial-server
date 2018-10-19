@@ -14,7 +14,7 @@ class UserModel(db.Model):
 
     user_id = db.Column("UserID", db.Integer, primary_key=True)
     username = db.Column("Username", db.String(80))
-    password = db.Column("Password", db.String(80))
+    password = db.Column("Password", db.String(300))
     first_name = db.Column("FirstName", db.String(80))
     last_name = db.Column("LastName", db.String(80))
     email = db.Column("Email", db.String(80))
