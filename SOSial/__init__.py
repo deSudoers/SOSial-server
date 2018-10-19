@@ -12,8 +12,6 @@ app.secret_key = "password"
 # Configure Database URI:
 params = urllib.parse.quote_plus("DRIVER={ODBC Driver 17 for SQL Server};SERVER=sosial.database.windows.net;DATABASE=data;UID=shrijitsingh99;PWD=Armageddon99")
 
-# params = urllib.parse.quote_plus('DRIVER={SQL Server};SERVER=HARRISONS-THINK;DATABASE=LendApp;Trusted_Connection=yes;')
-
 # SQLAlchemy Configurations
 app.config['SQLALCHEMY_DATABASE_URI'] = "mssql+pyodbc:///?odbc_connect=%s" % params
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
@@ -83,3 +81,7 @@ api.add_resource(UserFamily, "/family")
 from SOSial.Resources.message import Message
 
 api.add_resource(Message, "/message")
+
+from SOSial.Resources.trigger import Trigger
+
+api.add_resource(Trigger, "/trigger")
