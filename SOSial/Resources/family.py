@@ -30,6 +30,7 @@ class UserFamily(Resource):
                 if family_member.user_id in family:
                     return {"message": "Family member already exists in family"}, 400
                 family.append(family_member.user_id)
+                user_details.family = pickle.dumps(family[:])
 
             try:
                 user_details.save_to_db()
@@ -54,7 +55,7 @@ class UserFamily(Resource):
             family_member = UserModel.fetch_using_email(json_data["email"])
             if family_member.user_id in family:
                 family.remove(family_member.user_id)
-                user_details.family = pickle.dumps(family)
+                user_details.family = pickle.dumps(family[:])
                 try:
                     user_details.save_to_db()
                 except:
