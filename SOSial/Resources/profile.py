@@ -31,7 +31,7 @@ class UserProfile(Resource):
 
             return {"user_id": user_data["user_id"],
                     "email": user_data["email"],
-                    "mobile": user_data["email"],
+                    "mobile": user_data["mobile"],
                     "name": user_data["first_name"] + " " + user_data["last_name"],
                     "family_id": ",".join(family_id),
                     "family_email": ",".join(family_email),

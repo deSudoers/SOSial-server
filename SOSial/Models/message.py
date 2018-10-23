@@ -27,7 +27,7 @@ class MessageModel(db.Model):
 
     @classmethod
     def fetch_using_unique_key(cls, unique_key):
-        return cls.query.filter_by(unique_key=unique_key).all()
+        return cls.query.filter_by(unique_key=unique_key).first()
 
     @classmethod
     def fetch_using_id(cls, receiver_id):
