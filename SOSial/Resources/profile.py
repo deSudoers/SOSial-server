@@ -21,13 +21,14 @@ class UserProfile(Resource):
             family_email = []
 
             if user_detail:
-                family = pickle.loads(user_detail.family)
-                if family:
-                    for member_id in family:
-                        member = UserModel.fetch_using_id(member_id)
-                        family_id.append(str(member.user_id))
-                        family_email.append(member.email)
-                        family_name.append(member.first_name + member.last_name)
+                if user_detail.family is not None:
+                    family = pickle.loads(user_detail.family)
+                    if family:
+                        for member_id in family:
+                            member = UserModel.fetch_using_id(member_id)
+                            family_id.append(str(member.user_id))
+                            family_email.append(member.email)
+                            family_name.append(member.first_name + member.last_name)
 
             return {"user_id": user_data["user_id"],
                     "email": user_data["email"],
