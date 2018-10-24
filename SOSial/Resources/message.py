@@ -36,7 +36,7 @@ class Message(Resource):
                         "sender_name": sender.first_name + " " + sender.last_name,
                         "sender_id": value,
                         "receiver_id": message.receiver_id,
-                        "unique_id": message.unique_id,
+                        "unique_id": message.unique_key,
                         "message": message.message
                                      })
             return {k: response_messages[k] for k in range(len(response_messages))}, 200
