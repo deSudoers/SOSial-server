@@ -26,7 +26,9 @@ class UserFamily(Resource):
             if user_details is None:
                 user_details = UserDetailModel(user_id=user_id, location=None, family=pickle.dumps([family_member.user_id]))
             else:
-                family = pickle.loads(user_details.family)
+                family = []
+                if user_details.family is not None:
+                    family = pickle.loads(user_details.family)
                 if family_member.user_id in family:
                     return {"message": "Family member already exists in family"}, 400
                 family.append(family_member.user_id)

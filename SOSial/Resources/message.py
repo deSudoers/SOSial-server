@@ -31,10 +31,10 @@ class Message(Resource):
             for value in json_data.values():
                 messages = MessageModel.fetch_using_id(value)
                 for message in messages:
-                    sender = UserModel.fetch_using_id(value)
+                    sender = UserModel.fetch_using_id(message.sender_id)
                     response_messages.append({
                         "sender_name": sender.first_name + " " + sender.last_name,
-                        "sender_id": value,
+                        "sender_id": message.sender_id,
                         "receiver_id": message.receiver_id,
                         "unique_id": message.unique_key,
                         "message": message.message
