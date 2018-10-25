@@ -122,19 +122,19 @@
                       ]
                     });
 
-              // var locations;
-              // var marker, i;
-              // $.getJSON("locations_data.json", function(json) {
-              //   locations = json;
-              //   var len = Object.keys(locations).length;
-              //   var bounds = new google.maps.LatLngBounds();
-              //   for (i = 0; i < len; i++) {  
-              //       marker = new google.maps.Marker({
-              //       position: new google.maps.LatLng(locations[i][0], locations[i][1]),
-              //       map: map
-              //     });
-              //   }
-              // });
+                    var locations;
+                    var marker, i;
+                    $.getJSON("map", function(json) {
+                      locations = json;
+                      var len = Object.keys(locations).length;
+                      var bounds = new google.maps.LatLngBounds();
+                      for (i = 0; i < len; i++) {
+                          marker = new google.maps.Marker({
+                          position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+                          map: map
+                        });
+                      }
+                    });
             }
 
         </script>
