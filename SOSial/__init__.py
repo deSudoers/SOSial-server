@@ -85,3 +85,7 @@ api.add_resource(Message, "/message")
 from SOSial.Resources.trigger import Trigger
 
 api.add_resource(Trigger, "/trigger")
+
+from SOSial.Resources.map import Map
+
+api.add_resource(Map, "/map")
