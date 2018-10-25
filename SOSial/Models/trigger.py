@@ -27,6 +27,10 @@ class TriggerModel(db.Model):
     def fetch_using_id(cls, trigger_id):
         return cls.query.filter_by(trigger_id=trigger_id).first()
 
+    def fetch_using_triggered(cls):
+        return cls.query.all()
+
+
     @classmethod
     def fetch_using_location(cls, latitude, longitude):
         return cls.query.filter(latitude < (cls.latitude + 1), latitude > (cls.latitude - 1), longitude < (cls.longitude + 1), longitude > (cls.longitude - 1)).first()

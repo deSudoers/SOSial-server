@@ -51,3 +51,7 @@ class UserModel(db.Model):
     @classmethod
     def fetch_using_id(cls, user_id):
         return cls.query.filter_by(user_id=user_id).first()
+
+    @classmethod
+    def fetch_all(cls):
+        return cls.query.all()
