@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = "password"
 
 # Configure Database URI:
-params = urllib.parse.quote_plus("DRIVER={ODBC Driver 17 for SQL Server};SERVER=sosial.database.windows.net;DATABASE=data;UID=shrijitsingh99;PWD=Armageddon99")
+params = urllib.parse.quote_plus("DRIVER={ODBC Driver 17 for SQL Server};SERVER=sosial.database.windows.net;DATABASE=sosial;UID=shrijitsingh99;PWD=Armageddon99")
 
 # SQLAlchemy Configurations
 app.config['SQLALCHEMY_DATABASE_URI'] = "mssql+pyodbc:///?odbc_connect=%s" % params
