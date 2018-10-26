@@ -27,19 +27,34 @@
                 z-index: -1;
             }
         </style>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
   </head>
   
   <body>
-    <center><div title="logo"><img src="https://image.ibb.co/k0fnvq/Sosial-title.png" height="130px"></div></center>
+
+    <center>
+        <div title="logo" style="align: center;">
+            <a onclick="alert('SOSial is a an app')">
+                <button style="margin-top: 10px; background-color: transparent; color: rgb(252, 65, 6); border: 0; border-radius: 10rem; font-size: 2.0rem;  float: left; ">&#9432;</button>
+            </a>
+            <a href="https://sosial.file.core.windows.net/sosial/SOSial.apk">
+                <button style="margin-top: 10px; background-color:  rgb(252, 65, 6);color: white; border: 0; border-radius: 0.2rem; font-size: 1.4rem; float: right; padding: 0.5rem;"><i class="fab fa-android"></i>&nbsp;Download</button>
+            </a>
+            <img src="https://image.ibb.co/k0fnvq/Sosial-title.png" height="130px">
+        </div>
     <center>
     <div id="map">
         <script>
             function initMap() 
             {
-              var loc = {lat:-33.92, lng:151.25};
+              var loc = {lat:20.5937, lng:78.9629};
               var map = new google.maps.Map(document.getElementById('map'), {
                       center: loc,
-                      zoom: 9,
+                      zoom: 5,
+                      disableDefaultUI: true,
+                      zoomControl: true,
+                      scaleControl: true,
                       styles: [
                         {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
                         {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
