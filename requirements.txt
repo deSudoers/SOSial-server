@@ -5,6 +5,9 @@ flask-session==0.3.1
 flask-sqlalchemy==2.3.2
 marshmallow==2.16.0
 marshmallow-sqlalchemy==0.14.1
-SQLAlchemy==1.2.12
+SQLAlchemy==1.3.0
 pyodbc==4.0.24
 itsdangerous==0.24
+Werkzeug==0.15.3
+Jinja2==2.10.1
+
