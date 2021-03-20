@@ -9,5 +9,5 @@ SQLAlchemy==1.3.0
 pyodbc==4.0.24
 itsdangerous==0.24
 Werkzeug==0.15.3
-Jinja2==2.10.1
+Jinja2==2.11.3
 
